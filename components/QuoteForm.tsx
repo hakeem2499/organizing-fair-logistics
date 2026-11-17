@@ -1,24 +1,47 @@
 "use client";
 
 import { useActionState } from "react";
-import { submitQuote, type QuoteFormState } from "@/app/actions/quote";
-import { SERVICES } from "@/lib/services";
+import { submitQuotation, type FormState } from "@/app/actions/quotation";
+import { CONTAINER_SIZES, SERVICE_TYPES } from "@/lib/site";
 
-const initialState: QuoteFormState = { status: "idle", message: "" };
+const initialState: FormState = { status: "idle", message: "" };
 
 const fieldClass =
-  "w-full rounded-md border border-neutral-300 bg-white px-3 py-2.5 text-sm outline-none ring-brand-yellow focus:ring-2";
+  "w-full rounded-sm border border-line bg-white px-3 py-2.5 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30";
 
 export function QuoteForm() {
-  const [state, formAction, pending] = useActionState(submitQuote, initialState);
+  const [state, formAction, pending] = useActionState(submitQuotation, initialState);
+
+  if (state.status === "success") {
+    return (
+      <div className="rounded-sm border border-gold/40 bg-[#fbf8f1] px-6 py-10 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-gold">
+          Request received
+        </p>
+        <h2 className="mt-2 text-2xl font-extrabold text-navy">Thank you</h2>
+        <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted">
+          {state.message}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form action={formAction} className="grid gap-4 md:grid-cols-2">
-      <label className="grid gap-1 text-sm font-medium">
-        Full name
-        <input className={fieldClass} name="name" required autoComplete="name" />
+      <label className="grid gap-1.5 text-sm font-semibold text-navy">
+        Full Name
+        <input className={fieldClass} name="fullName" required autoComplete="name" />
       </label>
-      <label className="grid gap-1 text-sm font-medium">
+      <label className="grid gap-1.5 text-sm font-semibold text-navy">
+        Company Name
+        <input
+          className={fieldClass}
+          name="companyName"
+          required
+          autoComplete="organization"
+        />
+      </label>
+      <label className="grid gap-1.5 text-sm font-semibold text-navy">
         Email
         <input
           className={fieldClass}
@@ -28,7 +51,7 @@ export function QuoteForm() {
           autoComplete="email"
         />
       </label>
-      <label className="grid gap-1 text-sm font-medium">
+      <label className="grid gap-1.5 text-sm font-semibold text-navy">
         Phone
         <input
           className={fieldClass}
@@ -38,61 +61,52 @@ export function QuoteForm() {
           autoComplete="tel"
         />
       </label>
-      <label className="grid gap-1 text-sm font-medium">
-        Company (optional)
-        <input className={fieldClass} name="company" autoComplete="organization" />
-      </label>
-      <label className="grid gap-1 text-sm font-medium md:col-span-2">
-        Service
-        <select className={fieldClass} name="service" required defaultValue="">
+      <label className="grid gap-1.5 text-sm font-semibold text-navy">
+        Service Type
+        <select className={fieldClass} name="serviceType" required defaultValue="">
           <option value="" disabled>
             Select a service
           </option>
-          {SERVICES.map((service) => (
-            <option key={service.slug} value={service.slug}>
-              {service.title}
+          {SERVICE_TYPES.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
             </option>
           ))}
         </select>
       </label>
-      <label className="grid gap-1 text-sm font-medium">
-        Origin
-        <input className={fieldClass} name="origin" placeholder="City, country, or port" />
+      <label className="grid gap-1.5 text-sm font-semibold text-navy">
+        Container Size
+        <select className={fieldClass} name="containerSize" defaultValue="">
+          <option value="">Select if applicable</option>
+          {CONTAINER_SIZES.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
+            </option>
+          ))}
+        </select>
       </label>
-      <label className="grid gap-1 text-sm font-medium">
-        Destination
-        <input
-          className={fieldClass}
-          name="destination"
-          placeholder="City, country, or warehouse"
-        />
-      </label>
-      <label className="grid gap-1 text-sm font-medium md:col-span-2">
-        Cargo / container details
-        <input
-          className={fieldClass}
-          name="cargoDetails"
-          placeholder="e.g. 1 x 40ft HC, 18 tonnes general cargo"
-        />
-      </label>
-      <label className="grid gap-1 text-sm font-medium md:col-span-2">
-        Message
+      <label className="grid gap-1.5 text-sm font-semibold text-navy md:col-span-2">
+        Description of Goods
         <textarea
           className={`${fieldClass} min-h-28`}
-          name="message"
+          name="goodsDescription"
+          required
           rows={4}
-          placeholder="Tell us timelines, Incoterms, or special handling needs"
+          placeholder="Commodity, quantity, weight, and any special handling"
+        />
+      </label>
+      <label className="grid gap-1.5 text-sm font-semibold text-navy md:col-span-2">
+        Additional Notes
+        <textarea
+          className={`${fieldClass} min-h-24`}
+          name="additionalNotes"
+          rows={3}
+          placeholder="Origin, destination, Incoterms, or preferred timeline"
         />
       </label>
 
       {state.message ? (
-        <p
-          className={`md:col-span-2 rounded-md px-3 py-2 text-sm ${
-            state.status === "success"
-              ? "bg-green-50 text-green-800"
-              : "bg-red-50 text-red-800"
-          }`}
-        >
+        <p className="rounded-sm bg-red-50 px-3 py-2 text-sm text-red-800 md:col-span-2">
           {state.message}
         </p>
       ) : null}
@@ -101,9 +115,9 @@ export function QuoteForm() {
         <button
           type="submit"
           disabled={pending}
-          className="rounded bg-brand-red px-6 py-3 text-sm font-bold text-white hover:bg-red-800 disabled:opacity-70"
+          className="rounded-sm bg-navy px-7 py-3 text-sm font-bold text-white hover:bg-navy-soft disabled:opacity-70"
         >
-          {pending ? "Sending…" : "Request a quote"}
+          {pending ? "Sending…" : "Submit quotation request"}
         </button>
       </div>
     </form>

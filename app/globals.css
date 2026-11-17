@@ -1,20 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f4ef;
-  --foreground: #1b1b1b;
-  --brand-yellow: #ffcc00;
-  --brand-red: #c8102e;
-  --brand-navy: #191919;
+  --background: #ffffff;
+  --foreground: #122033;
+  --navy: #0b1f3a;
+  --navy-deep: #071525;
+  --navy-soft: #13294a;
+  --gold: #c4a35a;
+  --gold-bright: #d4b36a;
+  --muted: #5b6b7f;
+  --line: #e6eaf0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-brand-yellow: var(--brand-yellow);
-  --color-brand-red: var(--brand-red);
-  --color-brand-navy: var(--brand-navy);
-  --font-sans: var(--font-geist-sans);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-soft: var(--navy-soft);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-sans: var(--font-barlow);
 }
 
 html {
@@ -24,11 +32,17 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-barlow), Arial, Helvetica, sans-serif;
 }
 
 input,
 select,
-textarea {
+textarea,
+button {
   font: inherit;
+}
+
+::selection {
+  background: #e8d7a8;
+  color: var(--navy);
 }

@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { loginAdmin, type AdminLoginState } from "@/app/actions/admin";
+import { BrandMark } from "@/components/BrandMark";
 
 const initialState: AdminLoginState = { status: "idle", message: "" };
 
@@ -9,24 +10,20 @@ export default function AdminLoginPage() {
   const [state, formAction, pending] = useActionState(loginAdmin, initialState);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-neutral-100 px-4">
+    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
       <form
         action={formAction}
-        className="w-full max-w-sm rounded-xl bg-white p-6 shadow-sm"
+        className="w-full max-w-sm border border-line bg-white p-6 shadow-sm"
       >
-        <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-          OrganizingFair Logistics
+        <BrandMark compact />
+        <h1 className="mt-5 text-2xl font-extrabold text-navy">Staff login</h1>
+        <p className="mt-2 text-sm text-muted">
+          Enter the admin password to view quotation and contact submissions.
         </p>
-        <h1 className="mt-2 text-2xl font-extrabold text-brand-navy">
-          Staff login
-        </h1>
-        <p className="mt-2 text-sm text-neutral-600">
-          Enter the admin password to view quote requests.
-        </p>
-        <label className="mt-6 grid gap-1 text-sm font-medium">
+        <label className="mt-6 grid gap-1 text-sm font-semibold text-navy">
           Password
           <input
-            className="rounded-md border border-neutral-300 px-3 py-2.5"
+            className="rounded-sm border border-line px-3 py-2.5"
             type="password"
             name="password"
             required
@@ -39,7 +36,7 @@ export default function AdminLoginPage() {
         <button
           type="submit"
           disabled={pending}
-          className="mt-5 w-full rounded bg-brand-red py-2.5 text-sm font-bold text-white disabled:opacity-70"
+          className="mt-5 w-full rounded-sm bg-navy py-2.5 text-sm font-bold text-white disabled:opacity-70"
         >
           {pending ? "Signing in…" : "Sign in"}
         </button>

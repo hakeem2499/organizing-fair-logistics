@@ -1,6 +1,6 @@
-# OrganizingFair Logistics Ltd
+# Organizingfair Logistics Limited
 
-Marketing site for freight forwarding, customs clearing, and container haulage, with a quote form stored in Neon Postgres via Prisma.
+Marketing site for freight forwarding, customs clearing, and container logistics, with quotation and contact forms stored in Neon Postgres via Prisma.
 
 ## Setup
 
@@ -25,4 +25,4 @@ Marketing site for freight forwarding, customs clearing, and container haulage, 
    npm run dev
    ```
 
-Open [http://localhost:3000](http://localhost:3000) for the public site and [http://localhost:3000/admin/login](http://localhost:3000/admin/login) for the quote inbox.
+Open [http://localhost:3000](http://localhost:3000) for the public site and [http://localhost:3000/admin/login](http://localhost:3000/admin/login) for the inbox.
