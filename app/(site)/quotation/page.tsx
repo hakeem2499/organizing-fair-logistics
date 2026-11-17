@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Bounded } from "@/components/Bounded";
 import { PageHero } from "@/components/PageHero";
 import { QuoteForm } from "@/components/QuoteForm";
 
@@ -16,8 +17,8 @@ export default function QuotationPage() {
         title="Tell us what you need to move"
         description="Share the cargo, service type, and any timing constraints. A coordinator will review your request and follow up with next steps."
       />
-      <section className="mx-auto grid max-w-6xl gap-12 px-4 py-16 md:grid-cols-12 md:px-6 md:py-20">
-        <div className="md:col-span-4">
+      <Bounded y="lg" innerClassName="grid gap-10 md:grid-cols-12 md:gap-12">
+        <div className="min-w-0 md:col-span-4">
           <h2 className="text-2xl font-extrabold text-navy">What to include</h2>
           <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted">
             <li>Commodity and estimated quantity or container size</li>
@@ -30,10 +31,10 @@ export default function QuotationPage() {
             written confirmation.
           </p>
         </div>
-        <div className="border border-line bg-white p-6 shadow-[0_8px_30px_rgba(11,31,58,0.04)] md:col-span-8 md:p-8">
+        <div className="min-w-0 border border-line bg-white p-5 shadow-[0_8px_30px_rgba(11,31,58,0.04)] sm:p-6 md:col-span-8 md:p-8">
           <QuoteForm />
         </div>
-      </section>
+      </Bounded>
     </>
   );
 }

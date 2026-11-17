@@ -7,7 +7,7 @@ import { CONTAINER_SIZES, SERVICE_TYPES } from "@/lib/site";
 const initialState: FormState = { status: "idle", message: "" };
 
 const fieldClass =
-  "w-full rounded-sm border border-line bg-white px-3 py-2.5 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30";
+  "w-full min-w-0 max-w-full rounded-sm border border-line bg-white px-3 py-2.5 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30";
 
 export function QuoteForm() {
   const [state, formAction, pending] = useActionState(submitQuotation, initialState);
@@ -27,7 +27,7 @@ export function QuoteForm() {
   }
 
   return (
-    <form action={formAction} className="grid gap-4 md:grid-cols-2">
+    <form action={formAction} className="grid min-w-0 gap-4 md:grid-cols-2">
       <label className="grid gap-1.5 text-sm font-semibold text-navy">
         Full Name
         <input className={fieldClass} name="fullName" required autoComplete="name" />

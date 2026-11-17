@@ -53,7 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${barlow.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-white text-foreground">
+      <body className="flex min-h-dvh flex-col overflow-x-clip bg-white text-foreground">
         {children}
       </body>
     </html>

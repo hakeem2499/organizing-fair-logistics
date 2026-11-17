@@ -6,7 +6,7 @@ import { submitContact, type FormState } from "@/app/actions/contact";
 const initialState: FormState = { status: "idle", message: "" };
 
 const fieldClass =
-  "w-full rounded-sm border border-line bg-white px-3 py-2.5 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30";
+  "w-full min-w-0 max-w-full rounded-sm border border-line bg-white px-3 py-2.5 text-sm text-navy outline-none transition focus:border-gold focus:ring-2 focus:ring-gold/30";
 
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(submitContact, initialState);
@@ -26,7 +26,7 @@ export function ContactForm() {
   }
 
   return (
-    <form action={formAction} className="grid gap-4">
+    <form action={formAction} className="grid min-w-0 gap-4">
       <label className="grid gap-1.5 text-sm font-semibold text-navy">
         Name
         <input className={fieldClass} name="name" required autoComplete="name" />

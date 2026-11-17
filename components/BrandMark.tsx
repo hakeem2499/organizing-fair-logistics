@@ -30,9 +30,9 @@ export function BrandMark({
       </span>
       <span className="min-w-0 leading-tight">
         <span
-          className={`block font-extrabold tracking-tight ${
+          className={`block truncate font-extrabold tracking-tight ${
             invert ? "text-white" : "text-navy"
-          } ${compact ? "text-[15px]" : "text-[17px] md:text-lg"}`}
+          } ${compact ? "text-[14px] sm:text-[15px]" : "text-base md:text-lg"}`}
         >
           {SITE.name}
         </span>

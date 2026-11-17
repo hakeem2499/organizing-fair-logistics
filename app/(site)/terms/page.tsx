@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Bounded } from "@/components/Bounded";
 import { PageHero } from "@/components/PageHero";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function TermsPage() {
         title="Terms of Service"
         description="Website use and quotation requests for Organizingfair Logistics Limited."
       />
-      <section className="mx-auto max-w-3xl px-4 py-16 md:px-6">
+      <Bounded y="lg" innerClassName="max-w-3xl">
         <p className="leading-relaxed text-muted">
           Quotation requests are invitations to treat and do not create a
           carriage contract until Organizingfair Logistics Limited issues and
@@ -31,7 +32,7 @@ export default function TermsPage() {
         >
           Back to home
         </Link>
-      </section>
+      </Bounded>
     </>
   );
 }

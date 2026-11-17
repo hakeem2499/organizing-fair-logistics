@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Bounded } from "@/components/Bounded";
 import { BrandMark } from "@/components/BrandMark";
 import { NAV_LINKS, SITE } from "@/lib/site";
 
@@ -16,21 +17,29 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50">
-      <div className="bg-navy text-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-1.5 text-xs tracking-wide md:px-6">
-          <p className="text-white/80">{SITE.location}</p>
-          <a
-            href={SITE.phoneHref}
-            className="hidden font-medium text-gold-bright hover:text-white sm:inline"
-          >
-            {SITE.phoneDisplay}
-          </a>
-        </div>
-      </div>
+    <header className="sticky top-0 z-50 w-full min-w-0 overflow-x-clip">
+      <Bounded
+        as="div"
+        y="none"
+        className="bg-navy py-1.5 text-white"
+        innerClassName="flex items-center justify-between gap-3"
+      >
+        <p className="min-w-0 truncate text-white/80">{SITE.location}</p>
+        <a
+          href={SITE.phoneHref}
+          className="hidden shrink-0 font-medium text-gold-bright hover:text-white sm:inline"
+        >
+          {SITE.phoneDisplay}
+        </a>
+      </Bounded>
 
       <div className="border-b border-line bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
+        <Bounded
+          as="div"
+          y="none"
+          className="py-3"
+          innerClassName="flex items-center justify-between gap-3"
+        >
           <Link
             href="/"
             className="min-w-0"
@@ -56,7 +65,7 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-3">
             <Link
               href="/quotation"
               className="hidden rounded-sm bg-navy px-4 py-2.5 text-sm font-bold text-white hover:bg-navy-soft sm:inline-flex"
@@ -84,25 +93,27 @@ export function Header() {
               </span>
             </button>
           </div>
-        </div>
+        </Bounded>
 
         {open ? (
-          <nav className="flex flex-col gap-1 border-t border-line px-4 py-4 lg:hidden">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={`rounded-sm px-2 py-2.5 text-sm font-semibold ${
-                  isActive(pathname, link.href)
-                    ? "bg-navy text-white"
-                    : "text-navy hover:bg-slate-50"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <Bounded as="nav" y="none" className="border-t border-line py-3 lg:hidden">
+            <div className="flex flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-sm px-2 py-2.5 text-sm font-semibold ${
+                    isActive(pathname, link.href)
+                      ? "bg-navy text-white"
+                      : "text-navy hover:bg-slate-50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </Bounded>
         ) : null}
       </div>
       <div className="h-0.5 bg-gold" />

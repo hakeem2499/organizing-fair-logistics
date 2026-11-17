@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Bounded } from "@/components/Bounded";
 import { ContactForm } from "@/components/ContactForm";
 import { PageHero } from "@/components/PageHero";
 import { SITE } from "@/lib/site";
@@ -17,15 +18,15 @@ export default function ContactPage() {
         title="Speak with our team"
         description="Use the form for general enquiries, or request a quotation if you already have shipment details."
       />
-      <section className="mx-auto grid max-w-6xl gap-12 px-4 py-16 md:grid-cols-12 md:px-6 md:py-20">
-        <div className="md:col-span-4">
+      <Bounded y="lg" innerClassName="grid gap-10 md:grid-cols-12 md:gap-12">
+        <div className="min-w-0 md:col-span-4">
           <h2 className="text-2xl font-extrabold text-navy">Company details</h2>
           <dl className="mt-6 space-y-5 text-sm">
             <div>
               <dt className="font-bold uppercase tracking-[0.14em] text-gold">
                 Address
               </dt>
-              <dd className="mt-1 text-muted">{SITE.address}</dd>
+              <dd className="mt-1 break-words text-muted">{SITE.address}</dd>
             </div>
             <div>
               <dt className="font-bold uppercase tracking-[0.14em] text-gold">
@@ -41,7 +42,7 @@ export default function ContactPage() {
               <dt className="font-bold uppercase tracking-[0.14em] text-gold">
                 Email
               </dt>
-              <dd className="mt-1">
+              <dd className="mt-1 break-all">
                 <a
                   href={`mailto:${SITE.email}`}
                   className="text-navy hover:text-gold"
@@ -58,10 +59,10 @@ export default function ContactPage() {
             </div>
           </dl>
         </div>
-        <div className="border border-line bg-white p-6 shadow-[0_8px_30px_rgba(11,31,58,0.04)] md:col-span-8 md:p-8">
+        <div className="min-w-0 border border-line bg-white p-5 shadow-[0_8px_30px_rgba(11,31,58,0.04)] sm:p-6 md:col-span-8 md:p-8">
           <ContactForm />
         </div>
-      </section>
+      </Bounded>
     </>
   );
 }

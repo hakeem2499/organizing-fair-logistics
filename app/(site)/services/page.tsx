@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Bounded } from "@/components/Bounded";
 import { PageHero } from "@/components/PageHero";
 import { SERVICES } from "@/lib/services";
 
@@ -18,14 +19,14 @@ export default function ServicesPage() {
         description="Four core services covering the full commercial path of cargo through Tin Can Island, Apapa Port, and connecting inland destinations."
       />
 
-      <section className="mx-auto max-w-6xl space-y-16 px-4 py-20 md:px-6">
+      <Bounded y="lg" innerClassName="space-y-16">
         {SERVICES.map((service, index) => (
           <article
             key={service.slug}
             id={service.slug}
             className="grid gap-8 border-b border-line pb-16 last:border-0 last:pb-0 md:grid-cols-12"
           >
-            <div className="md:col-span-4">
+            <div className="min-w-0 md:col-span-4">
               <span className="text-xs font-bold tracking-[0.16em] text-gold">
                 0{index + 1}
               </span>
@@ -33,7 +34,7 @@ export default function ServicesPage() {
                 {service.title}
               </h2>
             </div>
-            <div className="md:col-span-8">
+            <div className="min-w-0 md:col-span-8">
               <p className="text-base leading-relaxed text-muted">{service.details}</p>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                 {service.points.map((point) => (
@@ -46,21 +47,23 @@ export default function ServicesPage() {
             </div>
           </article>
         ))}
-      </section>
+      </Bounded>
 
-      <section className="bg-slate-50">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-14 md:flex-row md:items-center md:px-6">
-          <p className="text-xl font-bold text-navy">
-            Tell us what you are moving. We will recommend the right service mix.
-          </p>
-          <Link
-            href="/quotation"
-            className="rounded-sm bg-navy px-6 py-3 text-sm font-bold text-white hover:bg-navy-soft"
-          >
-            Get a Quotation
-          </Link>
-        </div>
-      </section>
+      <Bounded
+        y="sm"
+        className="bg-slate-50"
+        innerClassName="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center"
+      >
+        <p className="text-xl font-bold text-navy">
+          Tell us what you are moving. We will recommend the right service mix.
+        </p>
+        <Link
+          href="/quotation"
+          className="shrink-0 rounded-sm bg-navy px-6 py-3 text-sm font-bold text-white hover:bg-navy-soft"
+        >
+          Get a Quotation
+        </Link>
+      </Bounded>
     </>
   );
 }
